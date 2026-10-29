@@ -1,0 +1,38 @@
+---SOLVED---
+
+Alternate:
+Remove vertices where both vertices are in R or both are not in R
+
+None: 
+Remove R from graph and do djikstra's 
+
+Few: 
+Shortest path, edges to red vertices weight = 1 otherwise 0, 
+
+
+---NAIVE SOLUTION/IDEA---
+
+Some: 
+NAIVE: 
+Foreach v in {R \setminus visited}, try to find path p v -> t: 
+    If p exists:
+        Foreach y \in p, visited <- visited \cup y
+        For that path try find a path s -> v: If that path exists return true
+    visited <- visited \cup v
+
+
+
+Dangers:
+- Whole graph is in R
+
+
+---NOT SOLVED YET---
+
+Many: 
+IDEA: 
+https://en.wikipedia.org/wiki/Bellman–Ford_algorithm
+Use this with edges going into red vertices with weight -1, otherwise weight 0
+
+CONSIDERATIONS: 
+- Works on directed paths only (just make looping edges)
+- Vertices can be revisited

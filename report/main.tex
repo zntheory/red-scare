@@ -23,7 +23,7 @@ sorting=none,
 %style=bwl-FU,
 %sorting=nyt
 ]{biblatex}
-\addbibresource{Biblio.bib}
+\addbibresource{report/biblio.bib}
 \usepackage{wrapfig}
 \usepackage{multirow}
 \usepackage[table,xcdraw,dvipsnames]{xcolor}
@@ -41,8 +41,6 @@ sorting=none,
   {\usebibmacro{postnote}}
 
 % Niks pille, ellers får I flere farver >:C
-%\usepackage[dvipsnames]{xcolor}
-\usepackage{xcolor}
 \usepackage{colortbl}
 
 % TODO: Unsure of still in use
@@ -136,17 +134,16 @@ sorting=none,
 
 % TODO: Shorten some of the table and figure names ...
 
-\newpage
-\listoffigures
-\addcontentsline{toc}{chapter}{List of Figures}
-\newpage
-\listoftables
-\addcontentsline{toc}{chapter}{List of Tables}
-\newpage
+%\newpage
+%\listoffigures
+%\addcontentsline{toc}{chapter}{List of Figures}
+%\newpage
+%\listoftables
+%\addcontentsline{toc}{chapter}{List of Tables}
+%\newpage
 %\input{Chapters/Glossary}
-\addcontentsline{toc}{chapter}{List of Abbreviations}
+%\addcontentsline{toc}{chapter}{List of Abbreviations}
 \thispagestyle{preplain}
-
 
 \fancypagestyle{plain}{
     \fancyhf{}
@@ -187,55 +184,23 @@ sorting=none,
 \newpage
 \pagestyle{plains}
 \pagenumbering{arabic}
-%\input{Chapters/1 Introduction}
+\input{report/chapters/1-results}
 
 % -------- CHAPTER 2 BEGIN --------
 
 \newpage
-%\input{Chapters/2 Background}
-
-% -------- CHAPTER 3 BEGIN --------
-
-\newpage
-%\input{Chapters/3 Relevant Works}
-
-% -------- CHAPTER 4 BEGIN --------
-
-\newpage
-%\input{Chapters/4 Methodology}
-
-% -------- CHAPTER 5 BEGIN --------
-\newpage
-%\input{Chapters/5 Experiments}
-
-% -------- CHAPTER 6 BEGIN --------
-
-\newpage
-%\input{Chapters/6 Results}
-
-% -------- CHAPTER 7 BEGIN --------
-
-\newpage
-%\include{Chapters/7 Discussion}
-
-% -------- CHAPTER 8 BEGIN --------
-
-\newpage
-%\include{Chapters/8 Conclusion}
+\input{report/chapters/2-methods}
 
 % ------- HUSK AT CITERE1!! ---------
 % \cite[key]
 %\medskip
 
-% TODO: DELETE OR COMMENT OUT
-%\newpage
-%\input{biblio-quotes}
-
 \newpage
 \printbibliography[
 heading=bibintoc,
 title={References}
-] %Prints the entire bibliography with the title
+]
+
 
 % -------- APPENDICES HERE --------
 
