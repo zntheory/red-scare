@@ -105,7 +105,7 @@ sorting=none,
 \def\code#1{\texttt{#1}}
 \def\italics#1{\textit{#1}}
 
-\graphicspath{ {./Images/} }
+\graphicspath{ {./report/images/} }
 
 % --- TEMP PAGE FOR CHAR COUNT ---
 
@@ -131,7 +131,7 @@ sorting=none,
 \input{frontpage}
 
 \pagenumbering{roman}
-\input{Chapters/0 Abstract}
+%\input{Chapters/0 Abstract}
 \thispagestyle{preplain}
 
 % TODO: Shorten some of the table and figure names ...
@@ -143,7 +143,7 @@ sorting=none,
 \listoftables
 \addcontentsline{toc}{chapter}{List of Tables}
 \newpage
-\input{Chapters/Glossary}
+%\input{Chapters/Glossary}
 \addcontentsline{toc}{chapter}{List of Abbreviations}
 \thispagestyle{preplain}
 
@@ -178,7 +178,7 @@ sorting=none,
     \fancyhf{}
     \lhead{\leftmark}
     %\rhead{\today\\nayh - nizc - oliha}
-    %\lhead{\includegraphics[width=5cm]{Images/itu_logo.jpg}}
+    %\lhead{\includegraphics[width=5cm]{images/itu_logo.jpg}}
     \rfoot{Page \thepage}
 }
 
@@ -187,41 +187,41 @@ sorting=none,
 \newpage
 \pagestyle{plains}
 \pagenumbering{arabic}
-\input{Chapters/1 Introduction}
+%\input{Chapters/1 Introduction}
 
 % -------- CHAPTER 2 BEGIN --------
 
 \newpage
-\input{Chapters/2 Background}
+%\input{Chapters/2 Background}
 
 % -------- CHAPTER 3 BEGIN --------
 
 \newpage
-\input{Chapters/3 Relevant Works}
+%\input{Chapters/3 Relevant Works}
 
 % -------- CHAPTER 4 BEGIN --------
 
 \newpage
-\input{Chapters/4 Methodology}
+%\input{Chapters/4 Methodology}
 
 % -------- CHAPTER 5 BEGIN --------
 \newpage
-\input{Chapters/5 Experiments}
+%\input{Chapters/5 Experiments}
 
 % -------- CHAPTER 6 BEGIN --------
 
 \newpage
-\input{Chapters/6 Results}
+%\input{Chapters/6 Results}
 
 % -------- CHAPTER 7 BEGIN --------
 
 \newpage
-\include{Chapters/7 Discussion}
+%\include{Chapters/7 Discussion}
 
 % -------- CHAPTER 8 BEGIN --------
 
 \newpage
-\include{Chapters/8 Conclusion}
+%\include{Chapters/8 Conclusion}
 
 % ------- HUSK AT CITERE1!! ---------
 % \cite[key]
@@ -240,6 +240,6 @@ title={References}
 % -------- APPENDICES HERE --------
 
 \newpage
-\input{Chapters/9 Appendix}
+%\input{Chapters/9 Appendix}
 
 \end{document}
