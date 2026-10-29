@@ -1,0 +1,245 @@
+% I behøver ikke pille ved frontpage.tex ELLER NOGET AF DET HER btw ;-; pretty pls% You can't stop me >:3
+\documentclass[a4paper, 12 pt]{report}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{appendix}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{tabularx}
+\usepackage{titlepic}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage[hidelinks]{hyperref}
+\usepackage[
+backend=biber,
+style=numeric-comp,
+sorting=none,
+%style=bwl-FU,
+%sorting=nyt
+]{biblatex}
+\addbibresource{Biblio.bib}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
+
+% Cool cite
+\DeclareCiteCommand{\coolcite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printnames{labelname}%
+   \space(\printfield{year}\printfield{extradate})%
+   \space[\printtext[bibhyperref]{%
+      \printfield{prefixnumber}%
+      \printfield{labelnumber}}]}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% Niks pille, ellers får I flere farver >:C
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% TODO: Unsure of still in use
+% Ikke slet de her to. De skal bruges til bilaget :)
+\usepackage{listings}
+% for code snippets
+\usepackage{minted}
+
+% end of code package settings
+
+\DeclareCaptionType{equ}[][]
+
+\renewcommand{\headrule}{\hbox to\headwidth{\color{lightgray}\leaders\hrule height \headrulewidth\hfill}}
+% chapter må starte på samme side men hvis den er oveni en anden chapter, brug \vspace{xx pt} i mellem dem
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+% jfc this is only for the prettification of chapter headings >:C
+\usepackage[T1]{fontenc}
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
+\titlespacing*{\chapter}{0 pt}{20 pt}{20 pt}
+\titlespacing*{\section}{0 pt}{20 pt}{20 pt}
+
+% Sets paragraph spacing
+\onehalfspacing 
+
+% Content = Table of Contents; fjerner "chapter" :)
+\renewcommand\contentsname{Table of Contents}
+\renewcommand{\chaptername}{}
+
+% Changes Table -> Tabel
+% \renewcommand\tablename{Tabel}
+
+% Changes Figure -> Figur
+% \renewcommand\figurename{Figur}
+
+\newcommand{\quickcharcount}[1]{%
+  \immediate\write18{texcount -1 -sum -merge -char #1.tex > #1-chars.sum}%
+  \openin\tmp=#1-chars.sum%
+  \read\tmp to \thechar%
+  \closein\tmp%
+}
+
+\newcommand{\quickwordcount}[1]{%
+  \immediate\write18{texcount -1 -sum -merge #1.tex > #1-words.sum}%
+  \openin\tmp=#1-words.sum%
+  \read\tmp to \theword%
+  \closein\tmp%
+}
+
+%indent
+\setlength\parindent{0 pt}
+
+%Definerer 'italics' og 'code' font
+\def\code#1{\texttt{#1}}
+\def\italics#1{\textit{#1}}
+
+\graphicspath{ {./Images/} }
+
+% --- TEMP PAGE FOR CHAR COUNT ---
+
+%\quickwordcount{main}
+%\quickcharcount{main}
+%Characters: \thechar characters and approximately \theword spaces.
+%That makes approximately \the\numexpr\theword+\thechar\relax\ characters total.
+
+% Vi udkommenterer det her efter :)
+
+% -------- CHAPTER 0 BEGIN --------
+
+\begin{document}
+
+% abstract, ToC, list of figures
+\fancypagestyle{preplain}{
+    \fancyhf{}
+    \rfoot{\thepage} 
+    \renewcommand{\headrulewidth}{0 pt}
+    %\setlength{\headheight}{-55 pt}
+}
+
+\input{frontpage}
+
+\pagenumbering{roman}
+\input{Chapters/0 Abstract}
+\thispagestyle{preplain}
+
+% TODO: Shorten some of the table and figure names ...
+
+\newpage
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\newpage
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\newpage
+\input{Chapters/Glossary}
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\thispagestyle{preplain}
+
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \setlength{\headheight}{-55 pt}
+    \setlength{\footskip}{-75pt}
+    \rfoot{\thepage} 
+    \renewcommand{\headrulewidth}{0 pt}
+}
+
+\newpage
+\clearpage
+\tableofcontents
+\thispagestyle{preplain}
+
+% first page where chapters start
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0 pt}
+    \setlength{\headheight}{-55 pt}
+    %\renewcommand{\footskip}{-75 pt}
+    \setlength{\footskip}{-75pt}
+    %\renewcommand{\footruleskip}{75pt}
+    \rfoot{Page \thepage} 
+}
+
+% after the pages with new chapters
+% will ensure chapter titles are visible in header
+\fancypagestyle{plains}{
+    \fancyhf{}
+    \lhead{\leftmark}
+    %\rhead{\today\\nayh - nizc - oliha}
+    %\lhead{\includegraphics[width=5cm]{Images/itu_logo.jpg}}
+    \rfoot{Page \thepage}
+}
+
+% -------- CHAPTER 1 BEGIN --------
+
+\newpage
+\pagestyle{plains}
+\pagenumbering{arabic}
+\input{Chapters/1 Introduction}
+
+% -------- CHAPTER 2 BEGIN --------
+
+\newpage
+\input{Chapters/2 Background}
+
+% -------- CHAPTER 3 BEGIN --------
+
+\newpage
+\input{Chapters/3 Relevant Works}
+
+% -------- CHAPTER 4 BEGIN --------
+
+\newpage
+\input{Chapters/4 Methodology}
+
+% -------- CHAPTER 5 BEGIN --------
+\newpage
+\input{Chapters/5 Experiments}
+
+% -------- CHAPTER 6 BEGIN --------
+
+\newpage
+\input{Chapters/6 Results}
+
+% -------- CHAPTER 7 BEGIN --------
+
+\newpage
+\include{Chapters/7 Discussion}
+
+% -------- CHAPTER 8 BEGIN --------
+
+\newpage
+\include{Chapters/8 Conclusion}
+
+% ------- HUSK AT CITERE1!! ---------
+% \cite[key]
+%\medskip
+
+% TODO: DELETE OR COMMENT OUT
+%\newpage
+%\input{biblio-quotes}
+
+\newpage
+\printbibliography[
+heading=bibintoc,
+title={References}
+] %Prints the entire bibliography with the title
+
+% -------- APPENDICES HERE --------
+
+\newpage
+\input{Chapters/9 Appendix}
+
+\end{document}
