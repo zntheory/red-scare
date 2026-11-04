@@ -1,3 +1,5 @@
+import math
+import heapq
 
 
 def few_input_values():
@@ -36,8 +38,20 @@ def few_input_values():
 
     return (number_of_vertices, number_of_edges, number_of_red, name_to_vertex_index[start], name_to_vertex_index[sink], red_vertex_set, graph)
 
-def dijkstra():
-    print("not implemented")
+def dijkstra(graph, source, target):
+    #Define dist and prev
+    dist = [math.inf for _ in range(len(graph))]
+    prev = [None for _ in range(len(graph))]
+
+    Q = []
+    dist[source] = 0
+
+    for i in range(len(graph)):
+        Q[i] = dist[i]
+
+    Q
+
+    
 
 def few():
     #Gets all the input values
