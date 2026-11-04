@@ -37,7 +37,7 @@ def few_input_values(file):
 
     return (number_of_vertices, number_of_edges, number_of_red, name_to_vertex_index[start], name_to_vertex_index[sink], red_vertex_set, graph)
 
-def dijkstra(graph, source, target):
+def dijkstra(graph, source):
     #Define dist and prev
     dist = [math.inf for _ in range(len(graph))]
     prev = [None for _ in range(len(graph))]
@@ -45,14 +45,31 @@ def dijkstra(graph, source, target):
     Q = []
     dist[source] = 0
 
-    for i in range(len(graph)):
-        Q[i] = dist[i]
-
-    Q
-
+    heapq.heappush(Q, (dist[source],source))
     
+    ''' Choosing not to add everything into priority queue
+    for i in range(len(graph)):
+        heapq.heappush(Q, (dist[i],i))
+    '''
+    while Q:
+        u = heapq.heappop(Q)
+
+        for e in graph[u[1]]:
+            v = e[0]
+            distance = e[1]
+            alt = dist[u[1]] + distance
+            if alt < dist[v]:
+                dist[v] = alt
+                prev[v] = u
+                heapq.heappush(Q,(dist[v],v))
+
+    return dist, prev
 
 def few(f):
     #Gets all the input values
     number_of_vertices, number_of_edges, number_of_red, start, sink, red_vertex_set, graph = few_input_values(f)
 
+    dist, prev = dijkstra(graph, start)
+    if dist[sink] == math.inf:
+        print(-1)
+    else: print(dist[sink])
