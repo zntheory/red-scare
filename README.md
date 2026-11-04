@@ -7,7 +7,7 @@ _More to follow. Text below is a WIP._
 ## Installation
 
 **Requirements**
-- Python ???
+- Python [3.14.4](https://www.python.org/downloads/release/python-3144/)
 - ...
 
 _**Note** that there are currently no releases._
