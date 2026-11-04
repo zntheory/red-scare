@@ -69,7 +69,7 @@ def few(f):
     #Gets all the input values
     number_of_vertices, number_of_edges, number_of_red, start, sink, red_vertex_set, graph = few_input_values(f)
 
-    dist, prev = dijkstra(graph, start)
+    dist, _ = dijkstra(graph, start)
     if dist[sink] == math.inf:
-        print(-1)
-    else: print(dist[sink])
+        return -1
+    else: return dist[sink]
