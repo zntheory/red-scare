@@ -2,15 +2,15 @@ import math
 import heapq
 
 
-def few_input_values():
-    number_of_vertices, number_of_edges, number_of_red = map(int, input().split())
-    start, sink = input().split()
+def few_input_values(file):
+    number_of_vertices, number_of_edges, number_of_red = map(int, file.readline().split())
+    start, sink = file.readline().split()
 
     #Gets all vertexes, add the relevant to red set
     name_to_vertex_index = dict()
     red_vertex_set = set()
     for i in range(number_of_vertices):
-        inp = input().split()
+        inp = file.readline().split()
         if len(inp) == 2:
             red_vertex_set.add(i)
         name_to_vertex_index[inp[0]] = i
@@ -20,7 +20,7 @@ def few_input_values():
 
     #Creating the adjacency list graph
     for i in range(number_of_edges):
-        fro, typ, to = input().split()
+        fro, typ, to = file.readline().split()
 
         inp1 = (name_to_vertex_index[to],0)
         if name_to_vertex_index[to] in red_vertex_set:
@@ -32,7 +32,6 @@ def few_input_values():
             if name_to_vertex_index[fro] in red_vertex_set:
                 inp2 = (name_to_vertex_index[fro],1)
             graph[name_to_vertex_index[to]].append(inp2)
-
 
     
 
@@ -53,7 +52,7 @@ def dijkstra(graph, source, target):
 
     
 
-def few():
+def few(f):
     #Gets all the input values
-    number_of_vertices, number_of_edges, number_of_red, start, sink, red_vertex_set, graph = few_input_values()
+    number_of_vertices, number_of_edges, number_of_red, start, sink, red_vertex_set, graph = few_input_values(f)
 
