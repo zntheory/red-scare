@@ -10,9 +10,38 @@ None: Return the length of a shortest s,t-path internally avoiding R.
 """
 
 
+from collections import defaultdict, deque
+
+st = dict() # keys: src, trm
 V = set()
 E = dict()  # dict[list], vertex u maps to many vertices v
             # if undirected, vertex v maps to vertices edges u
+
+def bfs():
+    visited = defaultdict(lambda: False)
+
+    src = st["src"]
+    trm = st["trm"]
+
+    q = deque()
+    visited[src] = True
+    q.append(src)
+    breadth = 1
+
+    while q:
+        u = q.popleft()
+        breadth += 1
+
+        if trm in E[u]:
+            return breadth
+
+        for v in E[u]:
+            if not visited[v]:
+                visited[v] = True
+                q.append(v)
+
+    return -1
+
 
 # TODO: Optimisation idea
 # Get s, t then f.readlines() NO SPLIT
@@ -34,6 +63,8 @@ def parse(f):
             continue
         else:
             V.add(v[0])
+            if v[0] == s: st["src"] = v[0]
+            if v[0] == t: st["trm"] = v[0]
 
     for _ in range(m):
         u, x, v = f.readline().split()
@@ -47,14 +78,9 @@ def parse(f):
 
     return True
 
-
 def none(f):
+    # Removes R from graph
     if not parse(f):
         return -1
 
-    print("Vertices:", V)
-    print("Edges:", E)
-
-    # TODO: Remove R from graph and do Dijkstra
-
-    return 1
+    return bfs()
