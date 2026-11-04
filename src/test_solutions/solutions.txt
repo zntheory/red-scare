@@ -4,3 +4,5 @@ wall-z-1000.txt few 0
 wall-z-100.txt few 0
 wall-z-10.txt few 0
 gnm-10-20-1.txt few 2
+common-1-20.txt few -1
+common-1-50.txt few -1
