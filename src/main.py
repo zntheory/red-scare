@@ -3,11 +3,11 @@ import os
 
 DATAPATH = os.path.dirname(os.path.realpath("data/*.txt"))
 
-from algorithms.alternate import alternate
-from algorithms.few import few
-from algorithms.many import many
-from algorithms.none import none
-from algorithms.some import some
+# from algorithms.alternate import alternate
+# from algorithms.few import few
+from algorithms.many import many, NegativeCycleException
+# from algorithms.none import none
+# from algorithms.some import some
 
 def main():
   print("### Starting program! ###")
@@ -29,7 +29,10 @@ def main():
     case "few":
       few(f)
     case "many":
-      many(f)
+      try:
+        print(many(f))
+      except NegativeCycleException as err: # found negative cycle - problem is NP-hard, so give up
+        print(err)
     case "none":
       none(f)
     case "some":
@@ -37,12 +40,16 @@ def main():
     case "*":
       alternate(f)
       f.seek(0)
+
       few(f)
       f.seek(0)
+      
       many(f)
       f.seek(0)
+      
       none(f)
       f.seek(0)
+      
       some(f)
       f.seek(0)
     case _:
