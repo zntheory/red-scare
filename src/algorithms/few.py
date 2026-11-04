@@ -72,4 +72,7 @@ def few(f):
     dist, _ = dijkstra(graph, start)
     if dist[sink] == math.inf:
         return -1
-    else: return dist[sink]
+    elif start in red_vertex_set: 
+        return dist[sink]+1
+    else:
+        return dist[sink]

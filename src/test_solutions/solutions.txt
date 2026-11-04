@@ -1,0 +1,6 @@
+wall-n-1.txt few 0
+wall-z-10000.txt few 0
+wall-z-1000.txt few 0
+wall-z-100.txt few 0
+wall-z-10.txt few 0
+gnm-10-20-1.txt few 2

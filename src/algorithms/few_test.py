@@ -10,11 +10,12 @@ class TestFew(unittest.TestCase):
 
 
     # TESTS
-    # - run()
+    # to run use command from algorithms folder
+    # python3 -m unittest few_test.py
 
     def test_run_all(self):
         #print(self.input_files)
-        with open("../data/solutions.txt", "r") as sol:
+        with open("../test_solutions/solutions.txt", "r") as sol:
 
             #Gather all the known solutions from data/solutions.txt
             list_of_solutions = sol.readlines()
