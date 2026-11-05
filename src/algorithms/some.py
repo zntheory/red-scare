@@ -1,6 +1,6 @@
-from algorithms.many import many
+from algorithms import many
 
 
 def some(f):
-    return many(f) > 0
+    return many.many(f) > 0
         
