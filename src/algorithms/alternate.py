@@ -39,45 +39,41 @@ def not_same_type(red_vertex_set, fro, to):
 
 
 
-def dijkstra(graph, source):
-    #Define dist and prev
-    dist = [math.inf for _ in range(len(graph))]
-    prev = [None for _ in range(len(graph))]
+from collections import defaultdict, deque
 
-    Q = []
-    dist[source] = 0
+ # dict[list], vertex u maps to many vertices v
+            # if undirected, vertex v maps to vertices edges u
 
-    heapq.heappush(Q, (dist[source],source))
-    
-    ''' Choosing not to add everything into priority queue
-    for i in range(len(graph)):
-        heapq.heappush(Q, (dist[i],i))
-    '''
-    while Q:
-        u = heapq.heappop(Q)
+# Credits for base: https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/
+def bfs(graph, start, sink):
 
-        for e in graph[u[1]]:
-            v = e[0]
-            distance = e[1]
-            alt = dist[u[1]] + distance
-            if alt < dist[v]:
-                dist[v] = alt
-                prev[v] = u
-                heapq.heappush(Q,(dist[v],v))
 
-    return dist, prev
+    visited = defaultdict(lambda: False)
+
+    src = start
+    trm = sink
+
+    q = deque()
+    visited[src] = True
+    q.append(src)
+
+    while q:
+        u = q.popleft()
+
+        if trm in graph[u]:
+            return True
+
+        for v in graph[u]:
+            if not visited[v]:
+                visited[v] = True
+                q.append(v)
+
+    return False
 
 def alternate(f):
     #Gets all the input values
     number_of_vertices, number_of_edges, number_of_red, start, sink, red_vertex_set, graph = few_input_values(f)
 
-    print(graph)
-    '''
-    dist, _ = dijkstra(graph, start)
-    if dist[sink] == math.inf:
-        return -1
-    elif start in red_vertex_set: 
-        return dist[sink]+1
-    else:
-        return dist[sink]
-    '''
+    res = bfs(graph,start,sink)
+    return res
+    
