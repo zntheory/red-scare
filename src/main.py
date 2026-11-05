@@ -3,11 +3,11 @@ import os
 
 DATAPATH = os.path.dirname(os.path.realpath("data/*.txt"))
 
-# from algorithms.alternate import alternate
-# from algorithms.few import few
+from algorithms.alternate import alternate
+from algorithms.few import few
 from algorithms.many import many, NegativeCycleException
-# from algorithms.none import none
-# from algorithms.some import some
+from algorithms.none import none
+from algorithms.some import some
 
 def main():
   print("### Starting program! ###")
