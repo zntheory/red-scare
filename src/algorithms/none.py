@@ -17,6 +17,7 @@ V = set()
 E = dict()  # dict[list], vertex u maps to many vertices v
             # if undirected, vertex v maps to vertices edges u
 
+# Credits for base: https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/
 def bfs():
     visited = defaultdict(lambda: False)
 
