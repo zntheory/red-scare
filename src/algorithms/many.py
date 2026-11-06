@@ -25,7 +25,6 @@ def many(f):
     edges: list[edge] = []
 
 
-    print("--many--")
     n, m, r = map(int, f.readline().split())
     s, t = f.readline().split()
 
@@ -67,7 +66,7 @@ def many(f):
 
         else:
             print(f"Error: expected '--' or '->', but received '{tokens[1]}'")
-            return
+            raise Exception("Wrong input")
 
     # print(f"edges:")
     # for e in edges:

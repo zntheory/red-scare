@@ -1,5 +1,6 @@
 import unittest
-from algorithms.some import some
+from algorithms.some import *
+from algorithms.many import *
 import os
 
 
@@ -32,12 +33,14 @@ class TestSome(unittest.TestCase):
                     print("### Running test for file:",self.input_files[i],"###")
                     with open("data/"+str(self.input_files[i]), "r") as f:
                         try:
-                            result = some.some(f)
+                            result = some(f)
                             print("Gave result:", result)
                             possible+=1
-                        except:
+                        except NegativeCycleException:
                             print("Unsolvable")
                             impossible+=1
+                        except:
+                            print("Unrelated exception")
 
             print("Total amount of possible problems:", possible)
             print("Total amount of impossible problems:",impossible)
