@@ -17,8 +17,26 @@ class edge:
     def toString(self):
         return f"{self.src} --({self.weight})--> {self.dst}"
 
+class bellmanFordGraph:
+    """
+    A graph for the many or some problems
+    
+    Attributes:
+        n (int): Number of vertices
+        start (int): Index of start vertex
+        sink (int): Index of sink vertex
+        E (list[edge]): Edges in the graph
+        red (set[int]): Set containing indexes of all red nodes in grahp
+    """
+    def __init__(self, start: int, sink: int, n: int, E: list[edge], red: set[int]):
+        self.n = n
+        self.start = start
+        self.sink = sink
+        self.E = E
+        self.red = red
 
-def many(f):
+
+def createGraph(f) -> bellmanFordGraph:
     nameToInt : dict[str, int] = dict()
     red : set[int] = set()    
     
@@ -67,7 +85,6 @@ def many(f):
 
         else:
             print(f"Error: expected '--' or '->', but received '{tokens[1]}'")
-            return
 
     # print(f"edges:")
     # for e in edges:
@@ -76,15 +93,31 @@ def many(f):
     srcId = nameToInt[s]
     dstId = nameToInt[t]
 
-    dist = [1] * n
-    dist[srcId] = -1 if srcId in red else 0 
+    return bellmanFordGraph(srcId, dstId, n, edges, red)
 
-    for v in range(n): # vertexes
-        for e in edges: 
+
+def many(f, graph = None) -> int:
+    """
+    Return the maximum number of red vertices on any path from s to t.
+    
+    Returns -1 if no path from s to t is found. 
+    
+    :raises: 
+        NegativeCycleException: if thr graph contains a negative cycle (a cycle with one or more red vertices)
+
+    """
+    if graph == None: 
+        graph = createGraph(f)
+    
+    dist = [1] * graph.n
+    dist[graph.start] = -1 if graph.start in graph.red else 0 
+
+    for v in range(graph.n): # vertexes
+        for e in graph.E: 
             # print(f"check {e.toString()}")
             if dist[e.src] != 1 and dist[e.src] + e.weight < dist[e.dst]:
 
-                if v == n-1:
+                if v == graph.n-1:
                     raise NegativeCycleException("Negative cycle detected")
 
                 # print(f"relax {e.toString()} to {e.src} --({dist[e.src] + e.weight})--> {e.dst}")
@@ -93,4 +126,6 @@ def many(f):
     # print(f"{str(-dist[dstId])}")
     # print(f"{dist}")
 
-    return - dist[dstId]
+    print(f"test { - dist[graph.sink]}")
+
+    return - dist[graph.sink]
