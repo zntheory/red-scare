@@ -25,7 +25,7 @@ def many(f):
     edges: list[edge] = []
 
 
-    print("--many--")
+    # print("--many--")
     n, m, r = map(int, f.readline().split())
     s, t = f.readline().split()
 
